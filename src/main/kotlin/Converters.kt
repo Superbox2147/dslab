@@ -7,6 +7,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import java.io.File
 import kotlin.math.pow
 import kotlin.math.round
+import kotlin.math.roundToLong
 
 object Converters {
     fun convertFile(path: String, targetPath: String) {
@@ -67,13 +68,7 @@ object Converters {
     }
 
     private fun durationToLabOffsetPrecision(durationString: String): Long {
-        val split = durationString.split(".")
-        assert(split.size == 2)
-
-        val seconds = split[0].toLong() * 10_000_000L
-        val other = split[1].toLong() * 1_000L
-
-        return seconds + other
+        return (durationString.toDouble() * 10_000_000.0).roundToLong()
     }
 
     private fun baseOffsetToLabOffset(baseOffset: String): Long {
