@@ -73,6 +73,10 @@ object Converters {
 
     private fun baseOffsetToLabOffset(baseOffset: String): Long {
         val split = baseOffset.split(".")
+
+        if (split.size == 1)
+            return split[0].toLong()
+
         assert(split.size == 2)
 
         val seconds = split[0].toLong() * 10_000_000L
